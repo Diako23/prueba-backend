@@ -15,4 +15,4 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm install
-      - run: npm test -- --ci --reporters=default --reporters=jest-junit
+      - run: npm test -- --ci
