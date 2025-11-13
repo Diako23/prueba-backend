@@ -1,0 +1,91 @@
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### 1️⃣ CREAR un producto
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Laptop Dell XPS 15",
+  "precio": 1299.99,
+  "stock": 10
+}
+
+### 2️⃣ CREAR otro producto (para poder listar múltiples)
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Mouse Logitech",
+  "precio": 29.99,
+  "stock": 50
+}
+
+### 3️⃣ OBTENER todos los productos
+GET {{baseUrl}}/products
+
+### 4️⃣ OBTENER un producto por ID
+# Reemplaza el UUID con uno real que obtengas del POST anterior
+GET {{baseUrl}}/products/550e8400-e29b-41d4-a716-446655440000
+
+### 5️⃣ ACTUALIZAR solo el precio
+PATCH {{baseUrl}}/products/550e8400-e29b-41d4-a716-446655440000
+Content-Type: {{contentType}}
+
+{
+  "precio": 1199.99
+}
+
+### 6️⃣ ACTUALIZAR solo el stock
+PATCH {{baseUrl}}/products/550e8400-e29b-41d4-a716-446655440000
+Content-Type: {{contentType}}
+
+{
+  "stock": 5
+}
+
+### 7️⃣ ACTUALIZAR múltiples campos
+PATCH {{baseUrl}}/products/550e8400-e29b-41d4-a716-446655440000
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Laptop Dell XPS 17",
+  "precio": 1499.99,
+  "stock": 8
+}
+
+### 8️⃣ ELIMINAR un producto
+DELETE {{baseUrl}}/products/550e8400-e29b-41d4-a716-446655440000
+
+### ❌ PRUEBA DE ERROR: UUID inválido
+GET {{baseUrl}}/products/invalid-uuid
+
+### ❌ PRUEBA DE ERROR: Validación fallida (precio negativo)
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Producto inválido",
+  "precio": -10,
+  "stock": 5
+}
+
+### ❌ PRUEBA DE ERROR: Validación fallida (nombre vacío)
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+{
+  "nombre": "",
+  "precio": 100,
+  "stock": 5
+}
+
+### ❌ PRUEBA DE ERROR: Validación fallida (stock con decimales)
+POST {{baseUrl}}/products
+Content-Type: {{contentType}}
+
+{
+  "nombre": "Producto",
+  "precio": 100,
+  "stock": 5.5
+}
